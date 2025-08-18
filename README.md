@@ -230,3 +230,68 @@ This will run ESLint using the configuration above.If fixes are available, ESLin
 ```bash
 ng lint --fix
 ```
+
+---
+
+## 🔒 Husky + lint-staged (pre-commit)
+
+Ensure you have a Git repo initialized first:
+
+```bash
+git init
+```
+
+### 1) Install
+
+```bash
+npm i -D husky lint-staged
+```
+
+### 2) Initialize Husky
+
+```bash
+npx husky init
+```
+
+> Creates the `.husky/` folder and a default `pre-commit` hook.
+
+### 3) Configure the pre-commit hook
+
+Replace the contents of **`.husky/pre-commit`** with:
+
+```sh
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+```
+
+### 4) Add `lint-staged` config
+
+Add this to **`package.json`** (top-level):
+
+```json
+{
+	"lint-staged": {
+		"*.{ts,html,scss}": ["eslint --cache --fix"],
+		"*.{ts,js,json,md,scss,html,css}": ["prettier --write"]
+	}
+}
+```
+
+> This runs ESLint + Prettier **only on staged files**. We rely on `ng lint` for full runs; no extra `lint` script is required.
+
+### 5) Verify the hook
+
+```bash
+git add .
+git commit -m "chore: test hooks"
+```
+
+You should see `lint-staged` formatting and fixing changes before the commit is created.
+
+**Notes**
+
+- To bypass hooks (rare): `git commit --no-verify`.
+- If hooks don’t run, ensure you ran `git init` and that `.husky/pre-commit` is executable.
+- ESLint will lint both `.ts` and Angular templates (`.html`) based on your `eslint.config.js`.

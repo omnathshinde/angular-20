@@ -295,3 +295,145 @@ You should see `lint-staged` formatting and fixing changes before the commit is 
 - To bypass hooks (rare): `git commit --no-verify`.
 - If hooks don’t run, ensure you ran `git init` and that `.husky/pre-commit` is executable.
 - ESLint will lint both `.ts` and Angular templates (`.html`) based on your `eslint.config.js`.
+
+---
+
+## 🌍 Environment Variables
+
+Angular supports multiple environment files for different build configurations. Common setup includes:
+
+- `src/environments/environment.ts` → development (default)
+- `src/environments/environment.production.ts` → production
+- `src/environments/environment.testing.ts` → testing
+
+### Example files
+
+**`src/environments/environment.ts`**
+
+```ts
+export const environment = {
+	production: false,
+	apiUrl: 'http://localhost:3000',
+};
+```
+
+**`src/environments/environment.testing.ts`**
+
+```ts
+export const environment = {
+	production: false,
+	apiUrl: 'https://testing-api.example.com',
+};
+```
+
+**`src/environments/environment.production.ts`**
+
+```ts
+export const environment = {
+	production: true,
+	apiUrl: 'https://api.example.com',
+};
+```
+
+### angular.json configuration
+
+Update your `angular.json` build/serve targets:
+
+For build
+
+```json
+"configurations": {
+	"production": {
+		"budgets": [
+			{
+				"type": "initial",
+				"maximumWarning": "500kB",
+				"maximumError": "1MB"
+			},
+			{
+				"type": "anyComponentStyle",
+				"maximumWarning": "4kB",
+				"maximumError": "8kB"
+			}
+		],
+		"fileReplacements": [
+			{
+				"replace": "src/environments/environment.ts",
+				"with": "src/environments/environment.production.ts"
+			}
+		],
+		"outputHashing": "all"
+	},
+	"testing": {
+		"budgets": [
+			{
+				"type": "initial",
+				"maximumWarning": "500kB",
+				"maximumError": "1MB"
+			},
+			{
+				"type": "anyComponentStyle",
+				"maximumWarning": "4kB",
+				"maximumError": "8kB"
+			}
+		],
+		"fileReplacements": [
+			{
+				"replace": "src/environments/environment.ts",
+				"with": "src/environments/environment.testing.ts"
+			}
+		],
+		"optimization": true,
+		"sourceMap": true,
+		"namedChunks": true,
+		"extractLicenses": false
+	},
+	"development": {
+		"optimization": false,
+		"extractLicenses": false,
+		"sourceMap": true
+	}
+},
+"defaultConfiguration": "production"
+```
+
+And for serving:
+
+```json
+"configurations": {
+	"production": {
+		"buildTarget": "client:build:production"
+	},
+	"testing": {
+		"buildTarget": "client:build:testing"
+	},
+	"development": {
+		"buildTarget": "client:build:development"
+	}
+},
+"defaultConfiguration": "development"
+```
+
+### Usage
+
+```bash
+# development
+ng build --configuration development
+
+# testing
+ng build --configuration testing
+
+# production
+ng build --configuration production
+```
+
+```bash
+# development
+ng serve --configuration development
+
+# testing
+ng serve --configuration testing
+
+# production
+ng serve --configuration production
+```

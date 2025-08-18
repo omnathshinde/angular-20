@@ -1,6 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
 	selector: 'app-root',
 	imports: [RouterOutlet],
@@ -8,5 +10,5 @@ import { RouterOutlet } from '@angular/router';
 	styleUrl: './app.scss',
 })
 export class App {
-	protected readonly title = signal('client');
+	protected readonly title = signal(environment.apiUrl);
 }

@@ -4,9 +4,9 @@
 	"version": "0.0.0",
 	"lint-staged": {
 		"**/*.{ts,js}": [
-			"eslint --fix"
+			"ng lint --fix"
 		],
-		"**/*.{html,scss,json,md}": [
+		"**/*.{ts,js,json,md,scss,html,css}": [
 			"prettier --write"
 		]
 	},

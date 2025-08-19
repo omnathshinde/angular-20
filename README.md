@@ -271,12 +271,14 @@ npx lint-staged
 Add this to **`package.json`** (top-level):
 
 ```json
-{
-	"lint-staged": {
-		"*.{ts,html,scss}": ["eslint --cache --fix"],
-		"*.{ts,js,json,md,scss,html,css}": ["prettier --write"]
-	}
-}
+"lint-staged": {
+	"**/*.{ts,js}": [
+		"ng lint --fix"
+	],
+	"**/*.{ts,js,json,md,scss,html,css}": [
+		"prettier --write"
+	]
+},
 ```
 
 > This runs ESLint + Prettier **only on staged files**. We rely on `ng lint` for full runs; no extra `lint` script is required.

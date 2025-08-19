@@ -41,6 +41,37 @@ ng version
 
 ---
 
+## 📂 Node Version Setup
+
+To ensure consistency across environments, specify the Node.js version your Angular project uses.
+
+### 1) In `package.json`
+
+Add an `engines` field:
+
+```json
+{
+	"engines": {
+		"node": ">=22.0.0",
+		"npm": ">=10.0.0"
+	}
+}
+```
+
+This helps tools like npm and hosting providers (e.g., Vercel, Netlify, Heroku) pick the correct runtime.
+
+### 2) `.nvmrc` or `.node-version` file (optional)
+
+If you use **nvm** or similar Node version managers, create a `.nvmrc` or `.node-version` file in the project root:
+
+```
+22
+```
+
+Developers can then run `nvm use` or `fnm use` to switch automatically.
+
+---
+
 ## 🎨 Prettier Setup
 
 ### 1) Install Prettier

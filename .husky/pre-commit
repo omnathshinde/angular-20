@@ -1,1 +1,2 @@
+echo "🧹 Running pre-commit checks..."
 npx lint-staged

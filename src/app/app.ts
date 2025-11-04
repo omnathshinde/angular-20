@@ -11,4 +11,5 @@ import { environment } from "src/environments/environment";
 })
 export class App {
 	protected readonly title = signal(environment.apiUrl);
+	name = "Omnath Shinde";
 }

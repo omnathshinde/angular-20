@@ -346,7 +346,7 @@ Angular supports multiple environment files for different build configurations. 
 ```ts
 export const environment = {
 	production: false,
-	apiUrl: 'http://localhost:3000',
+	apiUrl: "http://localhost:3000",
 };
 ```
 
@@ -355,7 +355,7 @@ export const environment = {
 ```ts
 export const environment = {
 	production: false,
-	apiUrl: 'https://testing-api.example.com',
+	apiUrl: "https://testing-api.example.com",
 };
 ```
 
@@ -364,7 +364,7 @@ export const environment = {
 ```ts
 export const environment = {
 	production: true,
-	apiUrl: 'https://api.example.com',
+	apiUrl: "https://api.example.com",
 };
 ```
 

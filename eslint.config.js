@@ -1,15 +1,17 @@
-import eslint from '@eslint/js';
-import * as tseslint from 'typescript-eslint';
-import * as angular from 'angular-eslint';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import eslintPluginImport from 'eslint-plugin-import';
+import eslint from "@eslint/js";
+import * as tseslint from "typescript-eslint";
+import * as angular from "angular-eslint";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import eslintPluginImport from "eslint-plugin-import";
+import pluginPrettier from "eslint-plugin-prettier";
 
 export default tseslint.config(
 	{
-		files: ['**/*.ts'],
+		files: ["**/*.ts"],
 		plugins: {
-			'simple-import-sort': simpleImportSort,
+			"simple-import-sort": simpleImportSort,
 			import: eslintPluginImport,
+			prettier: pluginPrettier,
 		},
 		extends: [
 			eslint.configs.recommended,
@@ -19,42 +21,49 @@ export default tseslint.config(
 		],
 		processor: angular.processInlineTemplates,
 		rules: {
-			'simple-import-sort/imports': [
-				'error',
+			"prettier/prettier": "error",
+			"simple-import-sort/imports": [
+				"error",
 				{
-					groups: [
-						['^node:'],
-						['^@?\\w'],
-						['^src/', '^@app', '^@core', '^@shared'],
-						['^\\.'],
-						['^\\u0000'],
+					groups: [["^node:"], ["^@?\\w"], ["^src/", "^@app", "^@core", "^@shared"], ["^\\."], ["^\\u0000"]],
+				},
+			],
+			"simple-import-sort/exports": "error",
+			"import/first": "error",
+			"import/newline-after-import": "error",
+			"import/no-duplicates": "error",
+			"no-restricted-imports": [
+				"error",
+				{
+					patterns: [
+						{
+							group: ["../*"],
+							message: "❌ Avoid relative imports — use @models, @common, or @services aliases instead.",
+						},
 					],
 				},
 			],
-			'simple-import-sort/exports': 'error',
-			'import/first': 'error',
-			'import/newline-after-import': 'error',
-			'import/no-duplicates': 'error',
-			'@angular-eslint/directive-selector': [
-				'error',
+			"import/no-relative-parent-imports": "error",
+			"@angular-eslint/directive-selector": [
+				"error",
 				{
-					type: 'attribute',
-					prefix: 'app',
-					style: 'camelCase',
+					type: "attribute",
+					prefix: "app",
+					style: "camelCase",
 				},
 			],
-			'@angular-eslint/component-selector': [
-				'error',
+			"@angular-eslint/component-selector": [
+				"error",
 				{
-					type: 'element',
-					prefix: 'app',
-					style: 'kebab-case',
+					type: "element",
+					prefix: "app",
+					style: "kebab-case",
 				},
 			],
 		},
 	},
 	{
-		files: ['**/*.html'],
+		files: ["**/*.html"],
 		extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
 		rules: {},
 	},

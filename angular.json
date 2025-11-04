@@ -24,9 +24,14 @@
 							{
 								"glob": "**/*",
 								"input": "public"
+							},
+							{
+								"glob": "**/*",
+								"input": "src/assets",
+								"output": "/assets/"
 							}
 						],
-						"styles": ["src/styles.scss", "src/theme/variables.scss"]
+						"styles": ["src/styles.scss", "src/theme/variables.scss", "node_modules/ngx-toastr/toastr.css"]
 					},
 					"configurations": {
 						"production": {
@@ -109,9 +114,14 @@
 							{
 								"glob": "**/*",
 								"input": "public"
+							},
+							{
+								"glob": "**/*",
+								"input": "src/assets",
+								"output": "/assets/"
 							}
 						],
-						"styles": ["src/styles.scss", "src/theme/variables.scss"]
+						"styles": ["src/styles.scss", "src/theme/variables.scss", "node_modules/ngx-toastr/toastr.css"]
 					}
 				},
 				"lint": {

@@ -7,5 +7,4 @@ bootstrapApplication(App, appConfig)
 	.then(() => {
 		const splash = document.getElementById("splash");
 		if (splash) splash.remove();
-	})
-	.catch((err) => console.error(err));
+	}).catch((err) => console.error(err));

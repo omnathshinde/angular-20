@@ -5,7 +5,7 @@ import { appConfig } from "./app/app.config";
 
 bootstrapApplication(App, appConfig)
 	.then(() => {
-		const splash = document.getElementById('splash');
+		const splash = document.getElementById("splash");
 		if (splash) splash.remove();
 	})
 	.catch((err) => console.error(err));
